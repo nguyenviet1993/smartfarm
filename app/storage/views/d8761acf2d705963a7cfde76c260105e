@@ -1,0 +1,90 @@
+<?php $__env->startSection('title'); ?>
+    Thu hoạch
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('head'); ?>
+    <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('main_content'); ?>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Thu hoạch</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <?php if(Session::has('success_add_user')): ?>
+                            <div class="alert alert-success"><?php echo Session::get('success_add_user'); ?></div>
+                        <?php endif; ?>
+                        <form action="/add-user-action" method="post" class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label">Khối lượng :</label>
+                                <div class="controls">
+                                    <input type="text" class="span11" placeholder="3000" name="weigh"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Kích thước :</label>
+                                <div class="controls">
+                                    <input type="text" class="span11" placeholder="5" name="size" required/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Giá hiện tại</label>
+                                <div class="controls">
+                                    <input type="text" class="span11" placeholder="500000" name="current_price"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Người mua</label>
+                                <div class="controls">
+                                    <select name="buyer">
+                                        <option>A. Hoàng</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Loại tôm</label>
+                                <div class="controls">
+                                    <select name="type">
+                                        <option value="TOM-SONG">Tôm sống</option>
+                                        <option value="TOM-DA">Tôm đá</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Ngày bán</label>
+                                <div class="controls">
+                                    <input id="datetimepicker" type="text" name="date" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Ghi chú</label>
+                                <div class="controls">
+                                    <select multiple name="lake_id[]">
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-success">Lưu</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/date-time-picker/jquery.js"></script>
+    <script src="js/date-time-picker/jquery.datetimepicker.full.min.js"></script>
+    <script>
+        $.datetimepicker.setLocale('vi');
+        $('#datetimepicker').datetimepicker({
+            format: 'd-m-Y',
+            timepicker: false,
+        });
+
+    </script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main_layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

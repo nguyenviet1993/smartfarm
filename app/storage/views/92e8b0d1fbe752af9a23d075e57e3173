@@ -1,0 +1,99 @@
+<?php $__env->startSection('title'); ?>
+    Sửa người dùng
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('main_content'); ?>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Thông tin người dùng</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <?php if(Session::has('success_add_user')): ?>
+                            <div class="alert alert-success"><?php echo Session::get('success_add_user'); ?></div>
+                        <?php endif; ?>
+                        <form action="/edit-user-action" method="post" class="form-horizontal">
+                            <input type="text" class="span11" placeholder="hoangnv" name="username" required
+                                   value="<?php echo $user['username']; ?>" style="visibility: hidden"/>
+                            <div class="control-group">
+                                <label class="control-label">Họ và tên :</label>
+                                <div class="controls">
+                                    <input type="text" class="span11" placeholder="Nguyễn Văn Hoàng" name="full_name"
+                                           value="<?php echo $user['full_name']; ?>"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Địa chỉ</label>
+                                <div class="controls">
+                                    <input type="text" class="span11" placeholder="Hà nội" name="address"
+                                           value="<?php echo $user['address']; ?>"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Số điện thoại</label>
+                                <div class="controls">
+                                    <input type="text" class="span11" placeholder="0986786789" name="phone_number"
+                                           value="<?php echo $user['phone_number']; ?>"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Email</label>
+                                <div class="controls">
+                                    <input type="text" class="span11" placeholder="Email" name="email"
+                                           value="<?php echo $user['email']; ?>"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Nhân viên</label>
+                                <div class="controls">
+                                    <select name="role">
+                                        <?php foreach($roles  as $role): ?>
+                                            <?php if($role['code'] == $user['role']): ?>
+                                                <option value="<?php echo $role['code']; ?>"
+                                                        selected><?php echo $role['role_name']; ?></option>
+                                            <?php else: ?>
+                                                <option value="<?php echo $role['code']; ?>"><?php echo $role['role_name']; ?></option>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Chọn Ao quản lý</label>
+                                <div class="controls">
+                                    <select multiple name="lake_id[]">
+                                        <?php foreach($lakes as $lake): ?>
+                                            <?php $selected = false?>
+                                            <?php foreach($user_lake as $key=>$value): ?>
+                                                <?php if($key == $lake['lake_id']): ?>
+                                                    <?php $selected = true?>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                            <?php if($selected): ?>
+                                                <option selected
+                                                        value="<?php echo $lake['lake_id'].'|'.$lake['lake_name']; ?>"><?php echo $lake['lake_name']; ?></option>
+                                            <?php else: ?>
+                                                <option value="<?php echo $lake['lake_id'].'|'.$lake['lake_name']; ?>"><?php echo $lake['lake_name']; ?></option>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-success">Lưu</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('select2js'); ?>
+    <script src="js/select2.min.js"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main_layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

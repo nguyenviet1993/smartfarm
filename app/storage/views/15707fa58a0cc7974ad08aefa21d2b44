@@ -1,0 +1,98 @@
+<?php $__env->startSection('head'); ?>
+    <link type="text/css" rel="stylesheet" href="css/ui.notify.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('title'); ?>
+    Thống kê chi tiết thức ăn tiêu thụ
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('main_content'); ?>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-th"></i> </span>
+                        <h5><a href="/food-analytic?lake_id=<?php echo $lake_id; ?>&from_date=<?php echo $from_date; ?>&to_date=<?php echo $to_date; ?>"><i class="icon-arrow-left"></i></a> Thống kê chi tiết thức ăn tiêu
+                            thụ loại thức ăn số <span style="color: red"><?php echo $food_type; ?></span></h5>
+                    </div>
+                    <div class="widget-content tab-content">
+                        <div class="tab-pane active">
+                            <div class="tab-pane">
+                                <div class="widget-content nopadding">
+                                    <table class="table table-bordered table-striped" id="table_fee">
+                                        <thead>
+                                        <tr>
+                                            <th style="min-width: 200px">Loại thức ăn</th>
+                                            <th>Số lượng (Kg)</th>
+                                            <th>Ngày nhập</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php foreach($foods as $food): ?>
+                                            <?php if(@$food['food_val_1'] != 0 || @$food['food_val_2'] != 0): ?>
+                                                <tr>
+
+
+                                                    <?php if(@$food['food_type_1'] == $food_type ): ?>
+                                                        <td><?php echo $food['lake_name']; ?><?php echo $food['food_type']; ?></td>
+                                                        <td><?php echo @$food['food_val_1']; ?></td>
+                                                        <td><?php echo $food['date']; ?></td>
+                                                    <?php endif; ?>
+                                                    <?php if(@$food['food_type_2'] == $food_type): ?>
+                                                        <td><?php echo $food['lake_name']; ?><?php echo $food['food_type']; ?></td>
+                                                        <td><?php echo @$food['food_val_2']; ?></td>
+                                                        <td><?php echo $food['date']; ?></td>
+                                                    <?php endif; ?>
+                                                </tr>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="content">
+        <!--- container to hold notifications, and default templates --->
+        <div id="container" style="display:none">
+            <div id="default">
+                <h1>#{title}</h1>
+                <p>#{text}</p>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery/jquery.js" type="text/javascript"></script>
+    <script src="js/jquery/jquery-ui.js" type="text/javascript"></script>
+    <script src="js/jquery.notify.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        function create(template, vars, opts) {
+            return $container.notify("create", template, vars, opts);
+        }
+
+        $(function () {
+            $container = $("#container").notify();
+
+        });
+    </script>
+    <script src="js/date-time-picker/jquery.js"></script>
+    <script src="js/date-time-picker/jquery.datetimepicker.full.min.js"></script>
+    <script>
+        $.datetimepicker.setLocale('vi');
+        $('#datetimepicker').datetimepicker({
+            format: 'd-m-Y',
+            timepicker: false,
+        });
+        $('#datetimepicker1').datetimepicker({
+            format: 'd-m-Y',
+            timepicker: false,
+        });
+
+    </script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.layout_not_jquery', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,179 @@
+<?php $__env->startSection('title'); ?>
+    Chỉ số vật nuôi
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('main_content'); ?>
+    <style>
+        .fixed-colum{
+            width: 22px !important;
+            position: absolute;
+            margin-left: -15px;
+            background: #EFEFEF !important;
+            width: 14px;
+            /*border-right: solid 1px #DDDDDD;*/
+        }
+        .fixed-row{
+            width: 14px;
+            position: absolute;
+            margin-left: -15px;
+            /*border-right: solid 1px #DDDDDD;*/
+            background: #F9F9F9 !important;
+        }
+    </style>
+    Chức năng đang xây dựng
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-th"></i> </span>
+                        <h5>Thông tin hôm nay</h5>
+                    </div>
+                    <?php /*<div class="widget-title">*/ ?>
+                    <ul class="nav nav-tabs">
+
+                        <li class="active"><a data-toggle="tab" href="#tab1">Tab1</a></li>
+                        <li><a data-toggle="tab" href="#tab2">Tab2</a></li>
+
+                    </ul>
+                    <?php /*</div>*/ ?>
+                    <div class="widget-content tab-content">
+
+                        <div id="tab1" class="tab-pane active">
+                            <div id="tab1" class="tab-pane">
+                                <div class="widget-content nopadding">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th class="fixed-colum" >Lần</th>
+                                            <th></th>
+                                            <th>Cột 2</th>
+                                            <th>Cột 3</th>
+                                            <th>Cột 4</th>
+                                            <th>Cột 5</th>
+                                            <th>Cột 6</th>
+                                            <th>Cột 7</th>
+                                            <th>Cột 8</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id='table_repeat_1'>
+                                        <tr class="odd gradeX">
+                                            <td class="fixed-row">1</td>
+                                            <td></td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                        </tr>
+                                        <tr class="odd gradeX " >
+                                            <td class="fixed-row">1</td>
+                                            <td></td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                        </tr>
+                                        <tr class="odd gradeX">
+                                            <td class="fixed-row">1</td>
+                                            <td></td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                        </tr>
+                                        <tr class="odd gradeX">
+                                            <td class="fixed-row">1</td>
+                                            <td></td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                        </tr>
+                                        <tr class="odd gradeX">
+                                            <td class="fixed-row">1</td>
+                                            <td></td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                        </tr>
+                                        <tr class="odd gradeX">
+                                            <td class="fixed-row">1</td>
+                                            <td></td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                        </tr>
+                                        <tr class="odd gradeX">
+                                            <td class="fixed-row">1</td>
+                                            <td></td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                            <td>10000</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab2" class="tab-pane">
+                            <div id="tab2" class="tab-pane">
+                                <div class="widget-content nopadding">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>Lần1</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id='table_repeat_1'>
+                                        <tr class="odd gradeX">
+                                            <td></td>
+                                            <td class="form-group">
+                                                <select style="width: 60px;">
+                                                    <?php for($k=1;$k<=12;$k++): ?>
+                                                        <option value="<?php echo $k; ?>"><?php echo $k; ?></option>
+                                                    <?php endfor; ?>
+                                                </select>
+                                                <select style="width: 60px;">
+                                                    <?php for($h=0;$h<=60;$h++): ?>
+                                                        <option value="<?php echo $h; ?>"><?php echo $h; ?></option>
+                                                        <?php $h += 9;?>
+                                                    <?php endfor; ?>
+                                                </select>
+                                                <input type="number" class="input-val"/>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main_layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

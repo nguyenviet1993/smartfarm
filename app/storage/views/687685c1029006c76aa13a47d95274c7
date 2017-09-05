@@ -1,0 +1,152 @@
+<?php $__env->startSection('title'); ?>
+    Nhập thông tin trong ngày
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('head'); ?>
+    <style>
+        th, td {
+            white-space: nowrap;
+        }
+    </style>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('main_content'); ?>
+    <style>
+        .fixed-colum{
+            width: 70px !important;
+            position: absolute;
+            margin-left: -15px;
+            background: #EFEFEF !important;
+            border-right: solid 1px #DDDDDD;
+        }
+        .fixed-row{
+            width: 62px;
+            position: absolute;
+            margin-left: -15px;
+            height: 40px !important;
+            border-right: solid 1px #DDDDDD;
+            background: #F9F9F9 !important;
+        }
+    </style>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-th"></i> </span>
+                        <h5>Thông tin hôm nay</h5>
+                    </div>
+                    <?php /*<div class="widget-title">*/ ?>
+                    <ul class="nav nav-tabs">
+                        <?php $first = 0?>
+                        <?php foreach($lakes as $key=>$value): ?>
+                            <?php if($first == 0): ?>
+                                <li class="active"><a data-toggle="tab" href="#tab<?php echo $key; ?>"><?php echo $value; ?></a></li>
+                                <?php $first = 1;?>
+                            <?php else: ?>
+                                <li><a data-toggle="tab" href="#tab<?php echo $key; ?>"><?php echo $value; ?></a></li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </ul>
+                    <?php /*</div>*/ ?>
+                    <div class="widget-content tab-content">
+                        <?php foreach($lakes as $key=>$value): ?>
+                            <?php if($first == 1): ?>
+                                <div id="tab<?php echo $key; ?>" class="tab-pane active">
+                                    <?php $first = 2?>
+                                    <?php else: ?>
+                                        <div id="tab<?php echo $key; ?>" class="tab-pane">
+                                            <?php endif; ?>
+                                            <div class="widget-content nopadding">
+                                                <?php if(Session::has('success_add_eat')): ?>
+                                                    <div class="alert alert-success"><?php echo Session::get('success_add_eat'); ?></div>
+                                                <?php endif; ?>
+                                                <table class="table table-bordered table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="fixed-colum">Lần</th>
+
+                                                        <?php foreach($times as $time): ?>
+                                                            <th><?php echo $time['category_name']; ?></th>
+                                                        <?php endforeach; ?>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id='table_repeat_<?php echo $key; ?>'>
+                                                    <?php foreach($environments as $environment): ?>
+                                                        <tr class="odd gradeX">
+                                                            <td class="fixed-row"><?php echo $environment['category_name']; ?></td>
+
+                                                            <?php foreach($times as $time): ?>
+                                                                <td >
+                                                                    <select style="width: 60px; visibility: hidden;">
+                                                                            <option></option>
+                                                                    </select>
+                                                                    <select style="width: 60px;"
+                                                                            id="HOUR_<?php echo $key; ?>_<?php echo $environment['category_id']; ?>_<?php echo $time['category_id']; ?>"
+                                                                            onchange="changeValueItem('<?= $key ?>', '<?= $environment['category_id']?>','<?= $time['category_id']?>')">
+                                                                        <?php for($k=1;$k<=24;$k++): ?>
+                                                                            <?php if(@$index[$key.$environment['category_id'].$time['category_id']]['hour'] == $k): ?>
+                                                                                <option value="<?php echo $k; ?>"
+                                                                                        selected><?php echo $k; ?></option>
+                                                                            <?php else: ?>
+                                                                                <option value="<?php echo $k; ?>"><?php echo $k; ?></option>
+                                                                            <?php endif; ?>
+                                                                        <?php endfor; ?>
+                                                                    </select>
+                                                                    <select style="width: 60px;"
+                                                                            onchange="changeValueItem('<?= $key ?>', '<?= $environment['category_id']?>','<?= $time['category_id']?>')"
+                                                                            id="MINUTE_<?php echo $key; ?>_<?php echo $environment['category_id']; ?>_<?php echo $time['category_id']; ?>">
+                                                                        <?php for($h=0;$h<=50;$h++): ?>
+                                                                            <?php if(@$index[$key.$environment['category_id'].$time['category_id']]['minute'] == $h): ?>
+                                                                                <option value="<?php echo $h; ?>" selected><?php echo $h; ?></option>
+                                                                            <?php else: ?>
+                                                                                <option value="<?php echo $h; ?>"><?php echo $h; ?></option>
+                                                                            <?php endif; ?>
+                                                                            <?php $h += 9;?>
+                                                                        <?php endfor; ?>
+                                                                    </select>
+                                                                    <input type="number" class="input-val"
+                                                                           value="<?php echo @$index[$key.$environment['category_id'].$time['category_id']]['val']; ?>"
+                                                                           onchange="changeValueItem('<?= $key ?>', '<?= $environment['category_id']?>','<?= $time['category_id']?>')"
+                                                                           id="VAL_<?php echo $key; ?>_<?php echo $environment['category_id']; ?>_<?php echo $time['category_id']; ?>" />
+                                                                </td>
+                                                            <?php endforeach; ?>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                        <?php endforeach; ?>
+                                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function changeValueItem(lake_id, type_id, time_id) {
+            //get value by id
+            var hour = $('#HOUR_' + lake_id + '_' + type_id + '_' + time_id).val();
+            var minute = $('#MINUTE_' + lake_id + '_' + type_id + '_' + time_id).val();
+            var val = $('#VAL_' + lake_id + '_' + type_id + '_' + time_id).val();
+            var agrs = {
+                url: "/input-environment-index",
+                type: "get",
+                dateType: "text",
+                data: {
+                    time_id: time_id,
+                    type_id: type_id,
+                    hour: hour,
+                    minute: minute,
+                    val: val,
+                    lake_id: lake_id,
+                },
+                success: function (result) {
+//                    alert('Thành công!');
+                }
+            };
+
+            $.ajax(agrs);
+        }
+    </script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main_layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

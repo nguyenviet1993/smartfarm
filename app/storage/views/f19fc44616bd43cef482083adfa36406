@@ -1,0 +1,77 @@
+<?php $__env->startSection('title'); ?>
+    Quyết toán
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('main_content'); ?>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span6">
+                <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Quyết toán ngày <span style="color: red"><?= date('d-m-Y')?></span></h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <?php if(Session::has('error_statement')): ?>
+                            <div class="alert alert-error"><?php echo Session::get('error_statement'); ?></div>
+                        <?php endif; ?>
+                        <?php if(Session::has('success_statement')): ?>
+                            <div class="alert alert-success"><?php echo Session::get('success_statement'); ?></div>
+                        <?php endif; ?>
+                        <form action="/settlement-action" method="post" class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label">Tổng chi phí hàng tháng :</label>
+                                <label class="control-label"
+                                       style="text-align: left; margin-left: 20px; color: red"><?php echo number_format($fee_sum,0); ?>
+
+                                    vnđ</label>
+                                <input name="fees" value="<?php echo $fee_sum; ?>" style="visibility: hidden"/>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Tổng chi phí xây dựng cơ bản :</label>
+                                <label class="control-label"
+                                       style="text-align: left; margin-left: 20px; color: red"><?php echo number_format($inventory_sum,0); ?>
+
+                                    vnđ</label>
+                                <input name="inventories" value="<?php echo $inventory_sum; ?>" style="visibility: hidden"/>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Tổng tiền thu hoạch: </label>
+                                <label class="control-label"
+                                       style="text-align: left; margin-left: 20px; color: red"><?php echo number_format($harvesting_sum,0); ?>
+
+                                    vnđ</label>
+                                <input name="harvesting" value="<?php echo $harvesting_sum; ?>" style="visibility: hidden"/>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Số dư kì trước</label>
+                                <label class="control-label"
+                                       style="text-align: left; margin-left: 20px; color: red"><?php echo number_format($reconciliation,0); ?> vnđ</label>
+                                <input name="reconciliation" value="<?php echo $reconciliation; ?>" style="visibility: hidden"/>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Lãi suất</label>
+                                <label class="control-label"
+                                       style="text-align: left; margin-left: 20px; color: green"><?php echo number_format($interest,0); ?>
+
+                                    vnđ</label>
+                                <input name="interest_rate" value="<?php echo $interest; ?>" style="visibility: hidden"/>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Ghi chú</label>
+                                <textarea class="span7" name="note" rows="5"
+                                          style="text-align: left; margin-left: 20px; color: green"></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-success" onclick="return confirm('Bạn có muốn quyết toán không?')">Quyết toán</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('select2js'); ?>
+    <script src="js/select2.min.js"></script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main_layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

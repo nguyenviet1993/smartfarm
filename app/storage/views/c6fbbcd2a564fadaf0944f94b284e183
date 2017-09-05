@@ -1,0 +1,44 @@
+<?php $__env->startSection('title'); ?>
+    Thêm người dùng mới
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('main_content'); ?>
+    <div class="container-fluid">
+        <div class="quick-actions_homepage">
+            <ul class="quick-actions">
+                <?php foreach($lakes as $key=>$value): ?>
+                    <li class="bg_lb" style="padding-bottom: 10px"><a href="/"> <i class="icon-bar-chart"></i> <span
+                                    class="label label-warning"></span> <?php echo $key; ?> </a>
+                        <?php foreach($value as $item): ?>
+                            <span style="color: #ffffff; padding: 0px 10px">Ăn: <?php echo $item['food_type']; ?>
+
+                                - <?php echo $item['food_val']; ?> KG</span><br/>
+                            <span style="color: #ffffff; padding: 0px 10px;">
+                                <?php if($item['drug_val_1'] != 0 || $item['drug_val_2'] != 0 || $item['drug_val_3'] != 0): ?>
+                                    Thuốc:
+                                    <?php if($item['drug_val_1'] != 0): ?>
+                                        <?php echo $item['drug_1']; ?> - <?php echo $item['drug_val_1']; ?>
+
+                                    <?php endif; ?>
+                                    <?php if($item['drug_val_2'] != 0): ?>
+                                        | <?php echo $item['drug_2']; ?> - <?php echo $item['drug_val_2']; ?>
+
+                                    <?php endif; ?>
+                                    <?php if($item['drug_val_3'] != 0): ?>
+                                        | <?php echo $item['drug_3']; ?> - <?php echo $item['drug_val_3']; ?>
+
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            </span><br/>
+                        <?php endforeach; ?>
+
+                    </li>
+                <?php endforeach; ?>
+                <li class="bg_lg"><a href="form-add-lake"> <i class="icon-plus-sign"></i> <span
+                                class="label label-warning"></span> Thêm mới ao nuôi </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main_layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,8 @@
+<?php $__env->startSection('title'); ?>
+    Chi phí xây dựng cơ bản
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('main_content'); ?>
+    Chức năng đang xây dựng
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main_layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

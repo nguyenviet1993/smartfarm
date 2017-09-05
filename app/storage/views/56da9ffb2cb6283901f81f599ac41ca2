@@ -1,0 +1,106 @@
+<?php $__env->startSection('title'); ?>
+    Thu hoạch
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('head'); ?>
+    <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('main_content'); ?>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span7">
+                <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                        <h5>Thu hoạch</h5>
+                    </div>
+                    <div class="widget-content nopadding">
+                        <?php if(Session::has('success_add_harvesting')): ?>
+                            <div class="alert alert-success"><?php echo Session::get('success_add_harvesting'); ?></div>
+                        <?php endif; ?>
+                        <form action="/add-harvesting-action" method="post" class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label">Khối lượng :</label>
+                                <div class="controls">
+                                    <input type="text" class="span10" placeholder="Nhập khối lượng" name="weigh"
+                                           required/>&nbsp;(Kg)
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Số lượng :</label>
+                                <div class="controls">
+                                    <input type="text" class="span10" placeholder="Nhập kích thước" name="size"
+                                    />&nbsp;(Con)
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Giá hiện tại</label>
+                                <div class="controls">
+                                    <input type="text" class="span10" placeholder="Nhập giá bán hiện tại"
+                                           name="current_price" required/>&nbsp;(Vnđ/kg)
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Người mua</label>
+                                <div class="controls">
+                                    <select name="user_id">
+                                        <?php foreach($users as $user): ?>
+                                            <option value="<?php echo $user['user_id']; ?>"><?php echo $user['full_name']; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Loại tôm</label>
+                                <div class="controls">
+                                    <select name="type">
+                                        <option value="TOM-SONG">Tôm sống</option>
+                                        <option value="TOM-DA">Tôm đá</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Chọn Ao</label>
+                                <div class="controls">
+                                    <select name="lake">
+                                        <?php foreach($lakes as $lake=>$item): ?>
+                                            <option value="<?php echo $lake; ?>|<?php echo $item; ?>"><?php echo $item; ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Ngày bán</label>
+                                <div class="controls">
+                                    <input id="datetimepicker" type="text" name="day_of_sale"
+                                           value="<?=date('d-m-Y')?>"/>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label">Ghi chú</label>
+                                <div class="controls">
+                                    <textarea class="span10" name="note" rows="5"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-success"
+                                        onclick="return confirm('Bạn có muốn thu hoạch không?')">Lưu
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/date-time-picker/jquery.js"></script>
+    <script src="js/date-time-picker/jquery.datetimepicker.full.min.js"></script>
+    <script>
+        $.datetimepicker.setLocale('vi');
+        $('#datetimepicker').datetimepicker({
+            format: 'd-m-Y',
+            timepicker: false,
+        });
+
+    </script>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main_layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

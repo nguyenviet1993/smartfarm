@@ -1,0 +1,58 @@
+<?php $__env->startSection('title'); ?>
+    Danh sách người dùng
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('main_content'); ?>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+                    <div class="widget-title"><span class="icon"> <i class="icon-th"></i> </span>
+                        <h5>Thông tin người dùng</h5>
+                    </div>
+
+                    <div class="widget-content tab-content">
+                        <div id="tab1" class="tab-pane active">
+                            <div class="widget-content nopadding">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Tên đăng nhập</th>
+                                        <th>Tên đầy đủ</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Email</th>
+                                        <th>Quyền</th>
+                                        <th>Sửa</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php $i = 0?>
+                                    <?php foreach($users as $user): ?>
+                                        <tr class="odd gradeX">
+                                            <td><?php echo $i; ?></td>
+                                            <td><?php echo $user['username']; ?></td>
+                                            <td><?php echo $user['full_name']; ?></td>
+                                            <td><?php echo $user['phone_number']; ?></td>
+                                            <td><?php echo $user['email']; ?></td>
+                                            <td><?php echo $user['role_name']; ?></td>
+                                            <td><a class="tip" href="/edit-user?username=<?php echo $user['username']; ?>"
+                                                   title="Sửa"><i
+                                                            class="icon-pencil"></i></a> <a class="tip" href="#"
+                                                                                            title="Xóa"><i
+                                                            class="icon-remove"></i></a></td>
+                                        </tr>
+                                        <?php $i++?>
+                                    <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a class="btn btn-success" href="/add-user" style="margin: 10px 0px 10px 10px">Thêm</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main_layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

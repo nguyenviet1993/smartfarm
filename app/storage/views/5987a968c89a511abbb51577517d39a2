@@ -1,0 +1,46 @@
+<?php $__env->startSection('title'); ?>
+    Thêm mới ao nuôi
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('main_content'); ?>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="widget-box">
+                <div class="widget-title"><span class="icon"> <i class="icon-align-justify"></i> </span>
+                    <h5>Thông tin ao nuôi</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <?php if(Session::has('success_add_lake')): ?>
+                        <div class="alert alert-success"><?php echo Session::get('success_add_lake'); ?></div>
+                    <?php endif; ?>
+                    <form action="/add-lake-action" method="post" class="form-horizontal">
+                        <div class="control-group">
+                            <label class="control-label">Tên ao nuôi :</label>
+                            <div class="controls">
+                                <input type="text" class="span11" placeholder="Ao tôm số 01" name="lake_name" required/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Số lượng con giống (con):</label>
+                            <div class="controls">
+                                <input type="text" class="span11" placeholder="2000" name="amount_brood" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Diện tích (m2):</label>
+                            <div class="controls">
+                                <input type="text" class="span11" placeholder="1000" name="acreage" />
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main_layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
